@@ -156,3 +156,7 @@ void Player::project(Point& candidate) {
   //project direction
   direction_ = normalize(direction_ - dot(direction_, normal_)*normal_) ;
 }
+
+Point Player::get_position(){
+  return position_;
+}

@@ -48,7 +48,12 @@ class Player {
      * Controles pour gerer le deplacement du vehicule
      */
     void set_controller(const Controller* controller) ;
-    
+
+    /**
+     * Récupère la position du joueur 
+     */
+    Point get_position();
+
   private :
 
     //environment

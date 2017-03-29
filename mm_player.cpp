@@ -36,7 +36,10 @@ public:
         joueur2_.spawn_at(Point(1,1,0), Vector(0,1,0)) ;
         joueur2_.activate() ;
 
-        m_camera.lookat(Point(-20.f, -20.f, -20.f), Point(20.f, 20.f, 20.f));
+        //Gestion camera
+        m_camera.lookat(Point(joueur1_.get_position()), Point(10.f, 10.f, 10.f));
+        m_camera.translation((float) Point(joueur1_.get_position()).x, (float) Point(joueur1_.get_position()).y);
+
 
         // etat openGL par defaut
         glClearColor(0.2f, 0.2f, 0.2f, 1.f);        // couleur par defaut de la fenetre
@@ -77,6 +80,7 @@ public:
         draw(vehicule2_, player2_pos, m_camera) ;
 
         terrain_.draw(m_camera.view(), m_camera.projection(window_width(), window_height(), 45.f)) ;
+        m_camera.lookat(Point(joueur1_.get_position()), Point(10.f, 10.f, 10.f));
 
         //reset
         if(key_state('r')) {
