@@ -108,29 +108,29 @@ ifeq ($(config),release32)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/image.o \
-	$(OBJDIR)/draw.o \
-	$(OBJDIR)/uniforms.o \
-	$(OBJDIR)/texture.o \
-	$(OBJDIR)/widgets.o \
-	$(OBJDIR)/window.o \
-	$(OBJDIR)/mat.o \
 	$(OBJDIR)/image_io.o \
-	$(OBJDIR)/vec.o \
-	$(OBJDIR)/text.o \
+	$(OBJDIR)/app.o \
+	$(OBJDIR)/orbiter.o \
+	$(OBJDIR)/app_time.o \
+	$(OBJDIR)/window.o \
+	$(OBJDIR)/texture.o \
 	$(OBJDIR)/image_hdr.o \
-	$(OBJDIR)/wavefront.o \
+	$(OBJDIR)/program.o \
 	$(OBJDIR)/gamepads.o \
 	$(OBJDIR)/rgbe.o \
-	$(OBJDIR)/orbiter.o \
-	$(OBJDIR)/app.o \
-	$(OBJDIR)/program.o \
 	$(OBJDIR)/mesh.o \
+	$(OBJDIR)/vec.o \
+	$(OBJDIR)/widgets.o \
+	$(OBJDIR)/wavefront.o \
+	$(OBJDIR)/text.o \
+	$(OBJDIR)/uniforms.o \
+	$(OBJDIR)/image.o \
+	$(OBJDIR)/draw.o \
+	$(OBJDIR)/mat.o \
 	$(OBJDIR)/color.o \
-	$(OBJDIR)/app_time.o \
+	$(OBJDIR)/controller.o \
 	$(OBJDIR)/player.o \
 	$(OBJDIR)/terrain.o \
-	$(OBJDIR)/controller.o \
 	$(OBJDIR)/mm_player.o \
 
 RESOURCES := \
@@ -191,23 +191,19 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -MMD -MP $(DEFINES) $(INCLUDES) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/image.o: ../src/gKit/image.cpp
+$(OBJDIR)/image_io.o: ../src/gKit/image_io.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
-$(OBJDIR)/draw.o: ../src/gKit/draw.cpp
+$(OBJDIR)/app.o: ../src/gKit/app.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
-$(OBJDIR)/uniforms.o: ../src/gKit/uniforms.cpp
+$(OBJDIR)/orbiter.o: ../src/gKit/orbiter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
-$(OBJDIR)/texture.o: ../src/gKit/texture.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
-
-$(OBJDIR)/widgets.o: ../src/gKit/widgets.cpp
+$(OBJDIR)/app_time.o: ../src/gKit/app_time.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
@@ -215,19 +211,7 @@ $(OBJDIR)/window.o: ../src/gKit/window.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
-$(OBJDIR)/mat.o: ../src/gKit/mat.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
-
-$(OBJDIR)/image_io.o: ../src/gKit/image_io.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
-
-$(OBJDIR)/vec.o: ../src/gKit/vec.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
-
-$(OBJDIR)/text.o: ../src/gKit/text.cpp
+$(OBJDIR)/texture.o: ../src/gKit/texture.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
@@ -235,7 +219,7 @@ $(OBJDIR)/image_hdr.o: ../src/gKit/image_hdr.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
-$(OBJDIR)/wavefront.o: ../src/gKit/wavefront.cpp
+$(OBJDIR)/program.o: ../src/gKit/program.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
@@ -247,19 +231,39 @@ $(OBJDIR)/rgbe.o: ../src/gKit/rgbe.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
-$(OBJDIR)/orbiter.o: ../src/gKit/orbiter.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
-
-$(OBJDIR)/app.o: ../src/gKit/app.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
-
-$(OBJDIR)/program.o: ../src/gKit/program.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
-
 $(OBJDIR)/mesh.o: ../src/gKit/mesh.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
+
+$(OBJDIR)/vec.o: ../src/gKit/vec.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
+
+$(OBJDIR)/widgets.o: ../src/gKit/widgets.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
+
+$(OBJDIR)/wavefront.o: ../src/gKit/wavefront.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
+
+$(OBJDIR)/text.o: ../src/gKit/text.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
+
+$(OBJDIR)/uniforms.o: ../src/gKit/uniforms.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
+
+$(OBJDIR)/image.o: ../src/gKit/image.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
+
+$(OBJDIR)/draw.o: ../src/gKit/draw.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
+
+$(OBJDIR)/mat.o: ../src/gKit/mat.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
@@ -267,7 +271,7 @@ $(OBJDIR)/color.o: ../src/gKit/color.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
-$(OBJDIR)/app_time.o: ../src/gKit/app_time.cpp
+$(OBJDIR)/controller.o: src/controller.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
@@ -276,10 +280,6 @@ $(OBJDIR)/player.o: src/player.cpp
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
 $(OBJDIR)/terrain.o: src/terrain.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
-
-$(OBJDIR)/controller.o: src/controller.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
