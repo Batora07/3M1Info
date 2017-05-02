@@ -69,17 +69,23 @@ public:
       m_camera.translation(static_cast<float>(mx) / window_width(), static_cast<float>(my) / window_height());
 
     Transform player1_pos = joueur1_.transform();
-    draw(vehicule1_, player1_pos, m_camera);
     Transform player2_pos = joueur2_.transform();
-    draw(vehicule2_, player2_pos, m_camera);
+
+    //Transform persp(45.f, 1, 50.f, 50.f);
+
+    draw(vehicule1_, player1_pos, m_camera/*.view(), persp*/);
+    draw(vehicule2_, player2_pos, m_camera/*.view(), persp*/);
 
     terrain_.draw(m_camera.view(), m_camera.projection(window_width(), window_height(), 45.f));
-    m_camera.lookat(Point(joueur1_.get_position()), Point(10.f, 10.f, 10.f));
+    // TODO: player 2 position should be reversed (camera's going opposite from it)
+    m_camera.lookat(Point(joueur1_.get_position()/* - joueur2_.get_position()*/), 20.f);
 
     //reset
     if (key_state('r')) {
       joueur1_.spawn_at(Point(0, 0, 0), Vector(0, 1, 0));
       joueur1_.activate();
+      joueur2_.spawn_at(Point(1, 1, 0), Vector(0, 1, 0));
+      joueur2_.activate();
     }
 
     return 1;

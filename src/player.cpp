@@ -101,8 +101,7 @@ void Player::step() {
   switchable_ = !(controller_->up()
                   || controller_->down()
                   || controller_->left()
-                  || controller_->right()
-                  );
+                  || controller_->right());
 
   //compute new position position
   int time = SDL_GetTicks();
